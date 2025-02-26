@@ -52,4 +52,19 @@ services:
       - DATABASE_URL=postgresql://postgres:passDev@orders-db:5432/ordersDB?schema=public
       - NATS_SERVER=nats://nats-server:4222
 
+  payments-ms:
+    build: ./payments-ms
+    ports:
+      - ${PAYMENTS_MS_PORT}:${PAYMENTS_MS_PORT}
+    volumes:
+      - ./payments-ms/src:/usr/src/app/src
+    command: npm run start:dev
+    environment:
+      - PORT=${PAYMENTS_MS_PORT}
+      - STRIPE_SECRET=${STRIPE_SECRET}
+      - STRIPE_SUCCESS_URL=${STRIPE_SUCCESS_URL}
+      - STRIPE_CANCEL_URL=${STRIPE_CANCEL_URL}
+      - STRIPE_ENDPOINT_SECRET=${STRIPE_ENDPOINT_SECRET}
+      - NATS_SERVER=nats://nats-server:4222
+
 
