@@ -100,3 +100,11 @@ kubectl rollout restart deployment
 ```
 
 ### En windows ejecutar el comando en gitbash
+
+# Cambiar contexto de kubernetes
+
+```
+kubectl config get-contexts
+
+kubectl config use-context <context>
+```
