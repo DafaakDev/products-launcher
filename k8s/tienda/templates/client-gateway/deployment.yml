@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-gateway
+  labels:
+    app: client-gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: client-gateway
+  template:
+    metadata:
+      labels:
+        app: client-gateway
+    spec:
+      containers:
+        - name: client-gateway
+          image: southamerica-east1-docker.pkg.dev/dark-mark-452418-d3/store-image-registry/client-gateway
+          env:
+            - name: PORT
+              value: "3000"
+            - name: NATS_SERVER
+              value: "nats://nats:4222"
+          resources: { }
